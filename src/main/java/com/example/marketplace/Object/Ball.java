@@ -19,4 +19,6 @@ public class Ball {
 
     @OneToOne
     private User user;
+    private int ball;
+    private int percent;
 }

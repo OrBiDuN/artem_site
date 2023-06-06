@@ -14,15 +14,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/css/dataTables.bootstrap4.min.css">
 </head>
 
-<body>
-    <nav class="navbar navbar-light navbar-expand-md py-3">
+<body style="background-color: rgb(191 191 191);">
+    <nav class="navbar navbar-light navbar-expand-md py-3" style="/* background-color: #ceffce; */background: linear-gradient(to bottom, rgb(14 216 108), rgb(14 216 108));">
         <div class="container"><a class="navbar-brand d-flex align-items-center" href="#"><img th:src="@{/img/5ka_logo_rgb_02-e1663673744463-1024x406.png}" style="height: 35px;width: 157.75px;"></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-2"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-2">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"></li>
                     <li class="nav-item"></li>
                     <li class="nav-item"></li>
-                </ul><form th:action="@{/exit}" method="post"> <div class="form-group mb-3"><button type="submit" class="btn btn-primary d-block w-100">Выйти</button></div></form>
+                </ul><form th:action="@{/exit}" method="post"> <div class="form-group mb-3"><button type="submit" class="btn btn-primary d-block w-100" style="background: linear-gradient(to bottom, rgb(255 255 255), rgb(255 255 255));
+    color: rgb(0 0 0);">Выйти</button></div></form>
             </div>
         </div>
     </nav>
@@ -35,13 +36,38 @@
                             <div class="col">
                                 <div class="card shadow">
                                     <div class="card-header py-2">
-                                        <p class="lead text-info m-0"><span style="color: rgb(0, 0, 0);">Тесты</span></p>
+                                        <p class="lead text-info m-0"><span style="color: rgb(0, 0, 0);">Тесты требуется пройти</span></p>
                                     </div>
                                     <div class="card-body">
                                         <ul class="list-group">
-                                            <li class="list-group-item"><span>Тест 1</span><button class="btn btn-primary btn-lg float-end" type="button" style="margin: 0px;margin-left: auto;background: rgb(46,142,67);">Пройден</button></li>
-                                            <li class="list-group-item"><span>Тест 2</span><button class="btn btn-primary btn-lg float-end" type="button" style="margin: 0px;margin-left: auto;background: rgb(180,169,74);">Не успешно</button></li>
-                                            <li class="list-group-item"><span>Тест 3</span><button class="btn btn-primary btn-lg float-end" type="button" style="margin: 0px;margin-left: auto;background: rgb(137,22,22);">Требуется пройти</button></li>
+                                            <li class="list-group-item" th:each="test : ${tests_0}">
+                                                    <span th:text="${test.name}"> </span>
+                                                    <a th:href="'http://localhost:8081/2?test_id='+ ${test.id}" class="btn btn-primary btn-lg float-end" type="button" style="width: 215px;margin: 0px;margin-left: auto;background: rgb(142 46 46);">Пройти</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="card-header py-2">
+                                        <p class="lead text-info m-0"><span style="color: rgb(0, 0, 0);">Тесты пройдены не успешно</span></p>
+                                    </div>
+
+                                    <div class="card-body">
+                                        <ul class="list-group">
+                                            <li class="list-group-item" th:each="test_sn : ${tests_sucno}">
+                                                <span th:text="${test_sn.name}"> </span>
+                                                <a class="btn btn-primary btn-lg float-end" type="button" style="width: 215px;margin: 0px;margin-left: auto;background: rgb(189 191 60);" th:href="'http://localhost:8081/2?test_id='+ ${test_sn.id}">Повторить попытку</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="card-header py-2">
+                                        <p class="lead text-info m-0"><span style="color: rgb(0, 0, 0);">Тесты пройдены успешно</span></p>
+                                    </div>
+
+                                    <div class="card-body">
+                                        <ul class="list-group">
+                                            <li class="list-group-item" th:each="tests_suc : ${tests_suc}">
+                                                <span th:text="${tests_suc.name}"> </span>
+                                                <button class="btn btn-primary btn-lg float-end" type="button" style="width: 215px;margin: 0px;margin-left: auto;background: rgb(46,142,67);">Пройден успешно</button>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>

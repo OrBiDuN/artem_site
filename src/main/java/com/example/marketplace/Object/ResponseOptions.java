@@ -17,6 +17,7 @@ public class ResponseOptions {
 
     private String text;
     private int ball;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "question_id")
     private Questions question;
